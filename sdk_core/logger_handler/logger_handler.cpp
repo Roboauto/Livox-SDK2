@@ -94,7 +94,7 @@ void LoggerHandler::CreateFile(const WriteBuffer& write_buff) {
   uint8_t log_type = write_buff.log_type;
   log_branch_path_[log_type] = log_root_path_ + (log_root_path_.back() == '/' ? "" : "/") + "type_" + std::to_string(log_type);
   if (!IsDirectoryExits(log_branch_path_[log_type])) {
-    if (!MakeDirecotory(log_branch_path_[log_type])) {
+    if (!MakeDirectory(log_branch_path_[log_type])) {
       LOG_ERROR("Can't Create Dir {}", log_branch_path_[log_type]);
       return;
     }

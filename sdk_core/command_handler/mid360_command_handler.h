@@ -47,33 +47,33 @@ namespace lidar {
 
 class Mid360CommandHandler : public CommandHandler {
  public:
-  Mid360CommandHandler(DeviceManager* device_manager);
-  ~Mid360CommandHandler() {}
-  virtual bool Init(bool is_view);
+  explicit Mid360CommandHandler(DeviceManager* device_manager);
+  ~Mid360CommandHandler() = default;
+  bool Init(bool is_view) override;
 
-  virtual bool Init(const std::map<uint32_t, LivoxLidarCfg>& custom_lidars_cfg_map);
-  virtual void Handle(const uint32_t handle, uint16_t lidar_port, const Command& command);
-  virtual void UpdateLidarCfg(const ViewLidarIpInfo& view_lidar_info);
-  virtual void UpdateLidarCfg(const uint32_t handle, const uint16_t lidar_cmd_port);
-  virtual livox_status SendCommand(const Command& command);  
-  virtual livox_status SendLoggerCommand(const Command &command);
+  bool Init(const std::map<uint32_t, LivoxLidarCfg>& custom_lidars_cfg_map) override;
+  void Handle(uint32_t handle, uint16_t lidar_port, const Command& command) override;
+  void UpdateLidarCfg(const ViewLidarIpInfo& view_lidar_info) override;
+  void UpdateLidarCfg(uint32_t handle, uint16_t lidar_cmd_port) override;
+  livox_status SendCommand(const Command& command) override;
+  livox_status SendLoggerCommand(const Command &command) override;
 
   static void UpdateLidarCallback(livox_status status, uint32_t handle, LivoxLidarAsyncControlResponse *response, void *client_data);
-  void AddDevice(const uint32_t handle);
+  void AddDevice(uint32_t handle);
  private:
-  void SetCustomLidar(const uint32_t handle, const uint16_t lidar_cmd_port, const LivoxLidarCfg& lidar_cfg);
+  void SetCustomLidar(uint32_t handle, uint16_t lidar_cmd_port, const LivoxLidarCfg& lidar_cfg);
   void SetViewLidar(const ViewLidarIpInfo& view_lidar_info);
-  livox_status SendCommand(const Command &command, const uint16_t lidar_cmd_port);
+  livox_status SendCommand(const Command &command, uint16_t lidar_cmd_port);
 
   
-  bool GetHostInfo(const uint32_t handle, std::string& host_ip, uint16_t& cmd_port);
+  bool GetHostInfo(uint32_t handle, std::string& host_ip, uint16_t& cmd_port);
 
   void CommandsHandle(TimePoint now);
 
   void OnCommand(uint32_t handle, const Command &command);
-  void OnCommandAck(const uint32_t handle, const Command &command);
-  void OnCommandCmd(const uint32_t handle, const uint16_t lidar_port, const Command &command);
-  bool IsStatusException(const Command &command);
+  static void OnCommandAck(uint32_t handle, const Command &command);
+  static void OnCommandCmd(uint32_t handle, uint16_t lidar_port, const Command &command);
+  static bool IsStatusException(const Command &command);
   void QueryDiagnosisInfo(uint32_t handle);
   void OnLidarInfoChange(const Command &command);
  private:

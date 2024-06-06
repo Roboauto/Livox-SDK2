@@ -28,6 +28,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <cstdint>
 
 namespace livox {
 namespace lidar {
@@ -40,9 +41,9 @@ bool ChangeCurrentFileName(const std::string& dir_name, std::string file_name);
 bool StoreFileName(const char* filename, std::multimap<std::string, std::string>& files_name);
 bool DeleteHidFiles(const std::string& dir_name);
 
-bool MakeDirecotory(std::string dir);
+bool MakeDirectory(const std::string& dir);
 
-bool IsDirectoryExits(std::string dir);
+bool IsDirectoryExits(const std::string& dir);
 
 } // namespace lidar
 }  // namespace livox

@@ -74,7 +74,7 @@ bool LivoxLidarSdkInit(const char* path, const char* host_ip, const LivoxLidarLo
 
   InitLogger();
 
-  if (path == NULL && host_ip == NULL) {
+  if (path == nullptr && host_ip == nullptr) {
     return false;
   }
 
@@ -111,11 +111,11 @@ void LivoxLidarSdkUninit() {
   }
 
   LoggerManager::GetInstance().Destory();
-  // The reason for using WSACleanup() after previous statement is that Destory() still needs to send socket messages.
+  // The reason for using WSACleanup() after previous statement is that Destroy() still needs to send socket messages.
 #ifdef WIN32
     WSACleanup();
 #endif // WIN32
-  DeviceManager::GetInstance().Destory();
+    DeviceManager::GetInstance().Destroy();
   DataHandler::GetInstance().Destory();
   GeneralCommandHandler::GetInstance().Destory();
 

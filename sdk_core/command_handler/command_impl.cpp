@@ -24,19 +24,14 @@
 
 #include "command_impl.h"
 
-#include "livox_lidar_def.h"
 #include "general_command_handler.h"
 #include "debug_point_cloud_handler/debug_point_cloud_manager.h"
 #include "spdlog/fmt/fmt.h"
 
-#include "base/logging.h"
-#include "comm/protocol.h"
-#include "comm/generate_seq.h"
-
 #include "build_request.h"
 
 #include <sstream>
-#include <inttypes.h>
+#include <cinttypes>
 #include <string>
 #include <iomanip>
 #include <chrono>
@@ -99,7 +94,7 @@ livox_status CommandImpl::QueryLivoxLidarInternalInfo(uint32_t handle, QueryLivo
   req_len = sizeof(key_num) + sizeof(uint16_t);
 
   for (const auto &key : key_sets) {
-    LivoxLidarKeyValueParam* kList = (LivoxLidarKeyValueParam*)&req_buff[req_len];
+    auto* kList = (LivoxLidarKeyValueParam*)&req_buff[req_len];
     kList->key = static_cast<uint16_t>(key);
     req_len += sizeof(uint16_t);
   }
@@ -120,7 +115,7 @@ livox_status CommandImpl::QueryLivoxLidarFwType(uint32_t handle, QueryLivoxLidar
   req_len = sizeof(key_num) + sizeof(uint16_t);
 
 
-  LivoxLidarKeyValueParam* kList = (LivoxLidarKeyValueParam*)&req_buff[req_len];
+  auto* kList = (LivoxLidarKeyValueParam*)&req_buff[req_len];
   kList->key = static_cast<uint16_t>(kKeyFwType);
   req_len += sizeof(uint16_t);
 
@@ -140,7 +135,7 @@ livox_status CommandImpl::QueryLivoxLidarFirmwareVer(uint32_t handle, QueryLivox
   req_len = sizeof(key_num) + sizeof(uint16_t);
 
 
-  LivoxLidarKeyValueParam* kList = (LivoxLidarKeyValueParam*)&req_buff[req_len];
+  auto* kList = (LivoxLidarKeyValueParam*)&req_buff[req_len];
   kList->key = static_cast<uint16_t>(kKeyVersionApp);
   req_len += sizeof(uint16_t);
 
@@ -159,7 +154,7 @@ livox_status CommandImpl::SetLivoxLidarPclDataType(uint32_t handle, LivoxLidarPo
   memcpy(&req_buff[req_len], &key_num, sizeof(key_num));
   req_len = sizeof(key_num) + sizeof(uint16_t);
 
-  LivoxLidarKeyValueParam * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
+  auto * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
   kv->key = static_cast<uint16_t>(kKeyPclDataType);
   kv->length = sizeof(uint8_t);
   kv->value[0] = static_cast<uint8_t>(data_type);
@@ -180,7 +175,7 @@ livox_status CommandImpl::SetLivoxLidarScanPattern(uint32_t handle, LivoxLidarSc
   memcpy(&req_buff[req_len], &key_num, sizeof(key_num));
   req_len = sizeof(key_num) + sizeof(uint16_t);
 
-  LivoxLidarKeyValueParam * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
+  auto * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
   kv->key = static_cast<uint16_t>(kKeyPatternMode);
   kv->length = sizeof(uint8_t);
   kv->value[0] = static_cast<uint8_t>(scan_pattern);
@@ -201,7 +196,7 @@ livox_status CommandImpl::SetLivoxLidarDualEmit(uint32_t handle, bool enable, Li
   memcpy(&req_buff[req_len], &key_num, sizeof(key_num));
   req_len = sizeof(key_num) + sizeof(uint16_t);
 
-  LivoxLidarKeyValueParam * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
+  auto * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
   kv->key = static_cast<uint16_t>(kKeyDualEmitEn);
   kv->length = sizeof(uint8_t);
   if (enable) {
@@ -226,7 +221,7 @@ livox_status CommandImpl::EnableLivoxLidarPointSend(uint32_t handle, LivoxLidarA
   memcpy(&req_buff[req_len], &key_num, sizeof(key_num));
   req_len = sizeof(key_num) + sizeof(uint16_t);
 
-  LivoxLidarKeyValueParam * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
+  auto * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
   kv->key = static_cast<uint16_t>(kKeyPointSendEn);
   kv->length = sizeof(uint8_t);
   kv->value[0] = 0x00;
@@ -247,7 +242,7 @@ livox_status CommandImpl::DisableLivoxLidarPointSend(uint32_t handle, LivoxLidar
   memcpy(&req_buff[req_len], &key_num, sizeof(key_num));
   req_len = sizeof(key_num) + sizeof(uint16_t);
 
-  LivoxLidarKeyValueParam * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
+  auto * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
   kv->key = static_cast<uint16_t>(kKeyPointSendEn);
   kv->length = sizeof(uint8_t);
   kv->value[0] = 0x01;
@@ -334,11 +329,11 @@ livox_status CommandImpl::SetLivoxLidarInstallAttitude(uint32_t handle, const Li
   memcpy(&req_buff[req_len], &key_num, sizeof(key_num));
   req_len = sizeof(key_num) + sizeof(uint16_t);
 
-  LivoxLidarKeyValueParam * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
+  auto * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
   kv->key = static_cast<uint16_t>(kKeyInstallAttitude);
   kv->length = sizeof(LivoxLidarInstallAttitude);
 
-  LivoxLidarInstallAttitude* install_attitude_val = (LivoxLidarInstallAttitude*)&kv->value;
+  auto* install_attitude_val = (LivoxLidarInstallAttitude*)&kv->value;
   memcpy(install_attitude_val, &install_attitude, sizeof(LivoxLidarInstallAttitude));
   req_len += sizeof(LivoxLidarKeyValueParam) - 1 + sizeof(LivoxLidarInstallAttitude);
 
@@ -358,11 +353,11 @@ livox_status CommandImpl::SetLivoxLidarFovCfg0(uint32_t handle, const FovCfg& fo
   memcpy(&req_buff[req_len], &key_num, sizeof(key_num));
   req_len = sizeof(key_num) + sizeof(uint16_t);
 
-  LivoxLidarKeyValueParam * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
+  auto * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
   kv->key = static_cast<uint16_t>(kKeyFovCfg0);
   kv->length = sizeof(FovCfg);
 
-  FovCfg* fov_cfg = (FovCfg*)&kv->value;
+  auto* fov_cfg = (FovCfg*)&kv->value;
   memcpy(fov_cfg, &fov_cfg0, sizeof(FovCfg));
   req_len += sizeof(LivoxLidarKeyValueParam) - 1 + sizeof(FovCfg);
 
@@ -383,11 +378,11 @@ livox_status CommandImpl::SetLivoxLidarFovCfg1(uint32_t handle, const FovCfg& fo
   memcpy(&req_buff[req_len], &key_num, sizeof(key_num));
   req_len = sizeof(key_num) + sizeof(uint16_t);
 
-  LivoxLidarKeyValueParam * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
+  auto * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
   kv->key = static_cast<uint16_t>(kKeyFovCfg1);
   kv->length = sizeof(FovCfg);
 
-  FovCfg* fov_cfg = (FovCfg*)&kv->value;
+  auto* fov_cfg = (FovCfg*)&kv->value;
   memcpy(fov_cfg, &fov_cfg1, sizeof(FovCfg));
   req_len += sizeof(LivoxLidarKeyValueParam) - 1 + sizeof(FovCfg);
 
@@ -406,7 +401,7 @@ livox_status CommandImpl::EnableLivoxLidarFov(uint32_t handle, uint8_t fov_en, L
   memcpy(&req_buff[req_len], &key_num, sizeof(key_num));
   req_len = sizeof(key_num) + sizeof(uint16_t);
 
-  LivoxLidarKeyValueParam * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
+  auto * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
   kv->key = static_cast<uint16_t>(kKeyFovCfgEn);
   kv->length = sizeof(uint8_t);
   kv->value[0] = fov_en;
@@ -428,7 +423,7 @@ livox_status CommandImpl::DisableLivoxLidarFov(uint32_t handle, LivoxLidarAsyncC
   memcpy(&req_buff[req_len], &key_num, sizeof(key_num));
   req_len = sizeof(key_num) + sizeof(uint16_t);
 
-  LivoxLidarKeyValueParam * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
+  auto * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
   kv->key = static_cast<uint16_t>(kKeyFovCfgEn);
   kv->length = sizeof(uint8_t);
   kv->value[0] = 0x00;
@@ -452,7 +447,7 @@ livox_status CommandImpl::SetLivoxLidarDetectMode(uint32_t handle, LivoxLidarDet
   memcpy(&req_buff[req_len], &key_num, sizeof(key_num));
   req_len = sizeof(key_num) + sizeof(uint16_t);
 
-  LivoxLidarKeyValueParam * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
+  auto * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
   kv->key = static_cast<uint16_t>(kKeyDetectMode);
   kv->length = sizeof(uint8_t);
   kv->value[0] = static_cast<uint8_t>(mode);
@@ -475,11 +470,11 @@ livox_status CommandImpl::SetLivoxLidarFuncIOCfg(uint32_t handle, const FuncIOCf
   memcpy(&req_buff[req_len], &key_num, sizeof(key_num));
   req_len = sizeof(key_num) + sizeof(uint16_t);
 
-  LivoxLidarKeyValueParam * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
+  auto * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
   kv->key = static_cast<uint16_t>(kKeyFuncIoCfg);
   kv->length = sizeof(FuncIOCfg);
 
-  FuncIOCfg* func_io_cfg_val = (FuncIOCfg*)&kv->value;
+  auto* func_io_cfg_val = (FuncIOCfg*)&kv->value;
   memcpy(func_io_cfg_val, &func_io_cfg, sizeof(FuncIOCfg));
   req_len += sizeof(LivoxLidarKeyValueParam) - 1 + sizeof(FuncIOCfg);
 
@@ -500,10 +495,10 @@ livox_status CommandImpl::SetLivoxLidarBlindSpot(uint32_t handle, uint32_t blind
   req_len = sizeof(key_num) + sizeof(uint16_t);
 
   //blind spot
-  LivoxLidarKeyValueParam * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
+  auto * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
   kv->key = static_cast<uint16_t>(kKeyBlindSpotSet);
   kv->length = sizeof(uint32_t);
-  uint32_t* blind_spot_set = reinterpret_cast<uint32_t*>(&kv->value[0]);
+  auto* blind_spot_set = reinterpret_cast<uint32_t*>(&kv->value[0]);
   *blind_spot_set = blind_spot;
   req_len += sizeof(LivoxLidarKeyValueParam) - 1 + sizeof(uint32_t);
 
@@ -522,10 +517,10 @@ livox_status CommandImpl::SetLivoxLidarWorkMode(uint32_t handle, LivoxLidarWorkM
   memcpy(&req_buff[req_len], &key_num, sizeof(key_num));
   req_len = sizeof(key_num) + sizeof(uint16_t);
 
-  LivoxLidarKeyValueParam * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
+  auto * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
   kv->key = static_cast<uint16_t>(kKeyWorkMode);
   kv->length = sizeof(uint8_t);
-  uint8_t* val_work_mode = reinterpret_cast<uint8_t*>(&kv->value[0]);
+  auto* val_work_mode = reinterpret_cast<uint8_t*>(&kv->value[0]);
   *val_work_mode = work_mode;
   req_len += sizeof(LivoxLidarKeyValueParam) - 1 + sizeof(uint8_t);
 
@@ -546,7 +541,7 @@ livox_status CommandImpl::EnableLivoxLidarGlassHeat(uint32_t handle, LivoxLidarA
   req_len = sizeof(key_num) + sizeof(uint16_t); 
 
   //glass heat
-  LivoxLidarKeyValueParam * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
+  auto * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
   kv->key = static_cast<uint16_t>(kKeyGlassHeat);
   kv->length = sizeof(uint8_t);
   kv->value[0] = 0x01; //enable glass heat
@@ -568,7 +563,7 @@ livox_status CommandImpl::DisableLivoxLidarGlassHeat(uint32_t handle, LivoxLidar
   req_len = sizeof(key_num) + sizeof(uint16_t);
 
   //glass heat
-  LivoxLidarKeyValueParam * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
+  auto * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
   kv->key = static_cast<uint16_t>(kKeyGlassHeat);
   kv->length = sizeof(uint8_t);
   kv->value[0] = 0x00; //disable glass heat
@@ -590,7 +585,7 @@ livox_status CommandImpl::SetLivoxLidarGlassHeat(uint32_t handle, LivoxLidarGlas
   req_len = sizeof(key_num) + sizeof(uint16_t);
 
   //glass heat
-  LivoxLidarKeyValueParam * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
+  auto * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
   kv->key = static_cast<uint16_t>(kKeyGlassHeat);
   kv->length = sizeof(uint8_t);
   kv->value[0] = static_cast<uint8_t>(glass_heat);
@@ -611,7 +606,7 @@ livox_status CommandImpl::EnableLivoxLidarImuData(uint32_t handle, LivoxLidarAsy
   memcpy(&req_buff[req_len], &key_num, sizeof(key_num));
   req_len = sizeof(key_num) + sizeof(uint16_t);
 
-  LivoxLidarKeyValueParam * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
+  auto * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
   kv->key = static_cast<uint16_t>(kKeyImuDataEn);
   kv->length = sizeof(uint8_t);
   kv->value[0] = 0x01;
@@ -632,7 +627,7 @@ livox_status CommandImpl::DisableLivoxLidarImuData(uint32_t handle, LivoxLidarAs
   memcpy(&req_buff[req_len], &key_num, sizeof(key_num));
   req_len = sizeof(key_num) + sizeof(uint16_t);
 
-  LivoxLidarKeyValueParam * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
+  auto * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
   kv->key = static_cast<uint16_t>(kKeyImuDataEn);
   kv->length = sizeof(uint8_t);
   kv->value[0] = 0x00;
@@ -654,7 +649,7 @@ livox_status CommandImpl::EnableLivoxLidarFusaFunciont(uint32_t handle, LivoxLid
   req_len = sizeof(key_num) + sizeof(uint16_t);
 
   //glass heat
-  LivoxLidarKeyValueParam * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
+  auto * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
   kv->key = static_cast<uint16_t>(kKeyFusaEn);
   kv->length = sizeof(uint8_t);
   kv->value[0] = 0x01; //enable glass heat
@@ -676,7 +671,7 @@ livox_status CommandImpl::DisableLivoxLidarFusaFunciont(uint32_t handle, LivoxLi
   req_len = sizeof(key_num) + sizeof(uint16_t);
 
   //glass heat
-  LivoxLidarKeyValueParam * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
+  auto * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
   kv->key = static_cast<uint16_t>(kKeyFusaEn);
   kv->length = sizeof(uint8_t);
   kv->value[0] = 0x00; //disable glass heat
@@ -706,10 +701,10 @@ livox_status CommandImpl::SetLivoxLidarLogParam(uint32_t handle, const LivoxLida
   memcpy(&req_buff[req_len], &key_num, sizeof(key_num));
   req_len = sizeof(key_num) + sizeof(uint16_t);
 
-  LivoxLidarKeyValueParam * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
+  auto * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
   kv->key = static_cast<uint16_t>(kKeyLogParamSet);
   kv->length = sizeof(LivoxLidarLogParam);
-  LivoxLidarLogParam* log_param_val = (LivoxLidarLogParam*)&kv->value;
+  auto* log_param_val = (LivoxLidarLogParam*)&kv->value;
   memcpy(log_param_val, &log_param, sizeof(LivoxLidarLogParam));
 
   req_len += sizeof(LivoxLidarKeyValueParam) - sizeof(uint8_t) + sizeof(LivoxLidarLogParam);
@@ -849,7 +844,7 @@ livox_status CommandImpl::SendSingleControlCommand(uint32_t handle,
   memcpy(&req_buff[req_len], &key_num, sizeof(key_num));
   req_len = sizeof(key_num) + sizeof(uint16_t);
 
-  LivoxLidarKeyValueParam * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
+  auto * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
   kv->key = command_key;
   kv->length = sizeof(uint8_t);
   kv->value[0] = value;

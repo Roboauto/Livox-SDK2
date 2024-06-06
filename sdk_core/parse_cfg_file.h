@@ -27,9 +27,9 @@
 
 #include "livox_lidar_def.h"
 
-#include "rapidjson/document.h"
-#include "rapidjson/filereadstream.h"
-#include "rapidjson/stringbuffer.h"
+#include <rapidjson/document.h>
+#include <rapidjson/filereadstream.h>
+#include <rapidjson/stringbuffer.h>
 
 #include "comm/define.h"
 
@@ -43,7 +43,7 @@ namespace lidar {
 
 class ParseCfgFile {
  public:
-  explicit ParseCfgFile(const std::string& path);  
+  explicit ParseCfgFile(std::string path);
   bool Parse(std::shared_ptr<std::vector<LivoxLidarCfg>>& lidars_cfg_ptr,
              std::shared_ptr<std::vector<LivoxLidarCfg>>& custom_lidars_cfg_ptr,
              std::shared_ptr<LivoxLidarLoggerCfg>& lidar_logger_cfg_ptr,
@@ -62,9 +62,9 @@ class ParseCfgFile {
                         const uint8_t& device_type,
                         std::shared_ptr<std::vector<LivoxLidarCfg>>& lidars_cfg_ptr);
   bool ParseTypeLidarCfg(const rapidjson::Value &object, const rapidjson::Value &host_net_info_object, const uint8_t& device_type, LivoxLidarCfg& lidar_cfg);
-  bool ParseLidarNetInfo(const rapidjson::Value &object, LivoxLidarNetInfo& lidar_net_info);
-  bool ParseHostNetInfo(const rapidjson::Value &host_net_info_object, HostNetInfo& host_net_info);
-  bool ParseGeneralCfgInfo(const rapidjson::Value &object, GeneralCfgInfo& general_cfg_info);
+  static bool ParseLidarNetInfo(const rapidjson::Value &object, LivoxLidarNetInfo& lidar_net_info);
+  static bool ParseHostNetInfo(const rapidjson::Value &host_net_info_object, HostNetInfo& host_net_info);
+  static bool ParseGeneralCfgInfo(const rapidjson::Value &object, GeneralCfgInfo& general_cfg_info);
  private:
   const std::string path_;
 };

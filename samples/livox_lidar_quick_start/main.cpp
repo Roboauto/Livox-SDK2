@@ -186,7 +186,7 @@ int main(int argc, const char *argv[]) {
   const std::string path = argv[1];
 
   // REQUIRED, to init Livox SDK2
-  if (!LivoxLidarSdkInit(path.c_str())) {
+  if (!LivoxLidarSdkInit(nullptr/*path.c_str()*/, "192.168.1.50")) {
     printf("Livox Init Failed\n");
     LivoxLidarSdkUninit();
     return -1;

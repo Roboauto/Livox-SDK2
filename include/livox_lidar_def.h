@@ -25,7 +25,7 @@
 #ifndef LIVOX_LIDAR_DEF_H_
 #define LIVOX_LIDAR_DEF_H_
 
-#include <stdint.h>
+#include <cstdint>
 
 #define kMaxLidarCount 32
 
@@ -37,7 +37,7 @@
 
 #define kBroadcastCodeSize 16
 
-/** Fuction return value defination, refer to \ref LivoxStatus. */
+/** Function return value definition, refer to \ref LivoxLidarStatus. */
 typedef int32_t livox_status;
 
 
@@ -211,7 +211,7 @@ typedef enum {
 } LivoxLidarStatus;
 
 typedef struct {
-  uint16_t key;                /*< Key, refer to \ref DeviceParamKeyName. */
+  uint16_t key;                /*< Key, refer to \ref ParamKeyName. */
   uint16_t length;             /*< Length of value. */
   uint8_t value[1];            /*< Value. */
 } LivoxLidarKeyValueParam;
@@ -533,7 +533,7 @@ typedef void (*QueryLivoxLidarInternalInfoCallback)(livox_status status, uint32_
  * @param  status                 status info.
  * @param  response               lidar return code and error key.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 typedef void (*LivoxLidarAsyncControlCallback)(livox_status status, uint32_t handle, 
                                                LivoxLidarAsyncControlResponse *response, void *client_data);
@@ -542,7 +542,7 @@ typedef void (*LivoxLidarAsyncControlCallback)(livox_status status, uint32_t han
  * @param  status                 status info.
  * @param  response               lidar return code.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 typedef void (*LivoxLidarResetCallback)(livox_status status, uint32_t handle, LivoxLidarResetResponse* response, void* client_data);
 
@@ -552,7 +552,7 @@ typedef void (*LivoxLidarResetCallback)(livox_status status, uint32_t handle, Li
  * @param  status                 status info.
  * @param  response               lidar return code.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 typedef void (*LivoxLidarLoggerCallback)(livox_status status, uint32_t handle,
                                          LivoxLidarLoggerResponse* response, void* client_data);
@@ -562,7 +562,7 @@ typedef void (*LivoxLidarLoggerCallback)(livox_status status, uint32_t handle,
  * @param  status                 status info.
  * @param  response               lidar return code.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 typedef void (*LivoxLidarRebootCallback)(livox_status status, uint32_t handle, LivoxLidarRebootResponse* response, void* client_data);
 

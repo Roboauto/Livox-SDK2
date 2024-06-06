@@ -179,7 +179,7 @@ uint64_t GetDirTotalSize(const std::string& dir_name) {
     LOG_ERROR("opendir: {} failed", dir_name);
     return 0;
   }
-  struct dirent *dp = nullptr;
+  struct dirent *dp;
   while ((dp = readdir(dirp)) != nullptr) {
     // ignore . and ..
     if (strcmp(".", dp -> d_name) == EXIT_SUCCESS || strcmp("..", dp -> d_name) == EXIT_SUCCESS) {
@@ -201,7 +201,7 @@ bool GetFileNames(const std::string& dir_name, std::multimap<std::string, std::s
     return false;
   }
 
-  struct dirent *dp = nullptr;
+  struct dirent *dp;
   while ((dp = readdir(dirp)) != nullptr) {
     if (strcmp(dp->d_name, ".")   == 0 || 
         strcmp(dp->d_name, "..")  == 0 ||
@@ -237,7 +237,7 @@ bool ChangeHiddenFiles(const std::string& dir_name) {
     return false;
   }
 
-  struct dirent *dp = nullptr;
+  struct dirent *dp;
   while ((dp = readdir(dirp)) != nullptr) {
     if (strcmp(dp->d_name, ".") == 0 || strcmp(dp->d_name, "..") == 0) {
       continue;
@@ -285,7 +285,7 @@ bool DeleteHidFiles(const std::string& dir_name) {
     return false;
   }
 
-  struct dirent *dp = nullptr;
+  struct dirent *dp;
   while ((dp = readdir(dirp)) != nullptr) {
     if (strcmp(dp->d_name, ".") == 0 || strcmp(dp->d_name, "..") == 0) {
       continue;
@@ -345,8 +345,8 @@ bool StoreFileName(const char* filename, std::multimap<std::string, std::string>
   return true;
 }
 
-bool MakeDirecotory(std::string dir) {
-  int flag = -1;
+bool MakeDirectory(const std::string& dir) {
+  int flag;
 #ifdef WIN32
   flag = mkdir(dir.c_str());
 #else
@@ -355,7 +355,7 @@ bool MakeDirecotory(std::string dir) {
   return (flag == 0);
 }
 
-bool IsDirectoryExits(std::string dir) {
+bool IsDirectoryExits(const std::string& dir) {
   return access(dir.c_str(), 0) == EXIT_SUCCESS;
 }
 

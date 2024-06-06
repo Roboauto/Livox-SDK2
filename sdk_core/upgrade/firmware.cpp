@@ -22,7 +22,7 @@
 // SOFTWARE.
 //
 
-#include <string.h>
+#include <cstring>
 
 #include "firmware.h"
 
@@ -35,9 +35,7 @@ Firmware::Firmware() : data_(nullptr), file_size_(0) {
 }
 
 Firmware::~Firmware() {
-  if (data_) {
     delete[] data_;
-  }
 }
 void Firmware::Close() {
   file_.close();

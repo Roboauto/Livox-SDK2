@@ -47,17 +47,17 @@ namespace lidar {
 
 class HapCommandHandler : public CommandHandler {
  public:
-  HapCommandHandler(DeviceManager* device_manager);
-  ~HapCommandHandler() {}
+  explicit HapCommandHandler(DeviceManager* device_manager);
+  ~HapCommandHandler() = default;
   static HapCommandHandler& GetInstance();
-  virtual bool Init(bool is_view);
+  bool Init(bool is_view) override;
 
-  virtual bool Init(const std::map<uint32_t, LivoxLidarCfg>& custom_lidars_cfg_map);
-  virtual void Handle(const uint32_t handle, uint16_t lidar_port, const Command& command);
-  virtual void UpdateLidarCfg(const ViewLidarIpInfo& view_lidar_info);
-  virtual void UpdateLidarCfg(const uint32_t handle, const uint16_t lidar_cmd_port);
-  virtual livox_status SendCommand(const Command& command);
-  virtual livox_status SendLoggerCommand(const Command &command);
+  bool Init(const std::map<uint32_t, LivoxLidarCfg>& custom_lidars_cfg_map) override;
+  void Handle(uint32_t handle, uint16_t lidar_port, const Command& command) override;
+  void UpdateLidarCfg(const ViewLidarIpInfo& view_lidar_info) override;
+  void UpdateLidarCfg(uint32_t handle, uint16_t lidar_cmd_port) override;
+  livox_status SendCommand(const Command& command) override;
+  livox_status SendLoggerCommand(const Command &command) override;
 
   static void UpdateLidarCallback(livox_status status, uint32_t handle, LivoxLidarAsyncControlResponse *response, void *client_data);
   void AddDevice(const uint32_t handle);
@@ -72,8 +72,8 @@ class HapCommandHandler : public CommandHandler {
   void CommandsHandle(TimePoint now);
 
   void OnCommand(uint32_t handle, const Command &command);
-  void OnCommandAck(uint32_t handle, const Command &command);
-  void OnCommandCmd(const uint32_t handle, const uint16_t lidar_port, const Command &command);
+  static void OnCommandAck(uint32_t handle, const Command &command);
+  static void OnCommandCmd(const uint32_t handle, const uint16_t lidar_port, const Command &command);
   bool IsStatusException(const Command &command);
   void QueryDiagnosisInfo(uint32_t handle);
   void OnLidarInfoChange(const Command &command);

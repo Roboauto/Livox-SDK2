@@ -133,7 +133,7 @@ livox_status QueryLivoxLidarFirmwareVer(uint32_t handle, QueryLivoxLidarInternal
  *                                                            kLivoxLidarSphericalCoordinateData
  * @param  cb                     callback for the command.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 livox_status SetLivoxLidarPclDataType(uint32_t handle, LivoxLidarPointDataType data_type, LivoxLidarAsyncControlCallback cb, void* client_data);
 
@@ -144,7 +144,7 @@ livox_status SetLivoxLidarPclDataType(uint32_t handle, LivoxLidarPointDataType d
  *                                                            kLivoxLidarScanPatternNoneRepetive
  * @param  cb                     callback for the command.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 livox_status SetLivoxLidarScanPattern(uint32_t handle, LivoxLidarScanPattern scan_pattern, LivoxLidarAsyncControlCallback cb, void* client_data);
 
@@ -154,7 +154,7 @@ livox_status SetLivoxLidarScanPattern(uint32_t handle, LivoxLidarScanPattern sca
  * @param  enable                 if set dual emit the enable is true, else the enable is false
  * @param  cb                     callback for the command.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 livox_status SetLivoxLidarDualEmit(uint32_t handle, bool enable, LivoxLidarAsyncControlCallback cb, void* client_data);
 
@@ -163,7 +163,7 @@ livox_status SetLivoxLidarDualEmit(uint32_t handle, bool enable, LivoxLidarAsync
  * @param  handle                 device handle.
  * @param  cb                     callback for the command.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 livox_status EnableLivoxLidarPointSend(uint32_t handle, LivoxLidarAsyncControlCallback cb, void* client_data);
 
@@ -172,7 +172,7 @@ livox_status EnableLivoxLidarPointSend(uint32_t handle, LivoxLidarAsyncControlCa
  * @param  handle                 device handle.
  * @param  cb                     callback for the command.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 livox_status DisableLivoxLidarPointSend(uint32_t handle, LivoxLidarAsyncControlCallback cb, void* client_data);
 
@@ -182,7 +182,7 @@ livox_status DisableLivoxLidarPointSend(uint32_t handle, LivoxLidarAsyncControlC
  * @param  ipconfig               lidar ip info.
  * @param  cb                     callback for the command.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 livox_status SetLivoxLidarIp(uint32_t handle, LivoxLidarIpInfo* ip_config,
                              LivoxLidarAsyncControlCallback cb, void* client_data);
@@ -193,7 +193,7 @@ livox_status SetLivoxLidarIp(uint32_t handle, LivoxLidarIpInfo* ip_config,
  * @param  host_state_info_ipcfg  lidar ip info.
  * @param  cb                     callback for the command.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 livox_status SetLivoxLidarStateInfoHostIPCfg(uint32_t handle, HostStateInfoIpInfo* host_state_info_ipcfg,
                                              LivoxLidarAsyncControlCallback cb, void* client_data);
@@ -204,7 +204,7 @@ livox_status SetLivoxLidarStateInfoHostIPCfg(uint32_t handle, HostStateInfoIpInf
  * @param  host_point_ipcfg       lidar ip info.
  * @param  cb                     callback for the command.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 livox_status SetLivoxLidarPointDataHostIPCfg(uint32_t handle, HostPointIPInfo* host_point_ipcfg,
                                              LivoxLidarAsyncControlCallback cb, void* client_data);
@@ -215,7 +215,7 @@ livox_status SetLivoxLidarPointDataHostIPCfg(uint32_t handle, HostPointIPInfo* h
  * @param  host_imu_ipcfg         lidar ip info.
  * @param  cb                     callback for the command.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 livox_status SetLivoxLidarImuDataHostIPCfg(uint32_t handle, HostImuDataIPInfo* host_imu_ipcfg,
                                            LivoxLidarAsyncControlCallback cb, void* client_data);
@@ -226,7 +226,7 @@ livox_status SetLivoxLidarImuDataHostIPCfg(uint32_t handle, HostImuDataIPInfo* h
  * @param  install_attitude       extrinsic parameters.
  * @param  cb                     callback for the command.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 livox_status SetLivoxLidarInstallAttitude(uint32_t handle, LivoxLidarInstallAttitude* install_attitude,
                                           LivoxLidarAsyncControlCallback cb, void* client_data);
@@ -237,7 +237,7 @@ livox_status SetLivoxLidarInstallAttitude(uint32_t handle, LivoxLidarInstallAtti
  * @param  fov_cfg0               fov cfg.
  * @param  cb                     callback for the command.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 livox_status SetLivoxLidarFovCfg0(uint32_t handle, FovCfg* fov_cfg0, LivoxLidarAsyncControlCallback cb, void* client_data);
 
@@ -247,7 +247,7 @@ livox_status SetLivoxLidarFovCfg0(uint32_t handle, FovCfg* fov_cfg0, LivoxLidarA
  * @param  fov_cfg1               fov cfg.
  * @param  cb                     callback for the command.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 livox_status SetLivoxLidarFovCfg1(uint32_t handle, FovCfg* fov_cfg1, LivoxLidarAsyncControlCallback cb, void* client_data);
 
@@ -256,7 +256,7 @@ livox_status SetLivoxLidarFovCfg1(uint32_t handle, FovCfg* fov_cfg1, LivoxLidarA
  * @param  handle                 device handle.
  * @param  cb                     callback for the command.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 livox_status EnableLivoxLidarFov(uint32_t handle, uint8_t fov_en, LivoxLidarAsyncControlCallback cb, void* client_data);
 
@@ -265,7 +265,7 @@ livox_status EnableLivoxLidarFov(uint32_t handle, uint8_t fov_en, LivoxLidarAsyn
  * @param  handle                 device handle.
  * @param  cb                     callback for the command.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 livox_status DisableLivoxLidarFov(uint32_t handle, LivoxLidarAsyncControlCallback cb, void* client_data);
 
@@ -275,7 +275,7 @@ livox_status DisableLivoxLidarFov(uint32_t handle, LivoxLidarAsyncControlCallbac
  * @param  mode                   detect mode
  * @param  cb                     callback for the command.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 livox_status SetLivoxLidarDetectMode(uint32_t handle, LivoxLidarDetectMode mode, LivoxLidarAsyncControlCallback cb, void* client_data);
 
@@ -285,7 +285,7 @@ livox_status SetLivoxLidarDetectMode(uint32_t handle, LivoxLidarDetectMode mode,
  * @param  func_io_cfg            func io cfg; 0:IN0,1:IN1, 2:OUT0, 3:OUT1;Mid360 lidar 8, 10, 12, 11
  * @param  cb                     callback for the command.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 livox_status SetLivoxLidarFuncIOCfg(uint32_t handle, FuncIOCfg* func_io_cfg, LivoxLidarAsyncControlCallback cb, void* client_data);
 
@@ -295,7 +295,7 @@ livox_status SetLivoxLidarFuncIOCfg(uint32_t handle, FuncIOCfg* func_io_cfg, Liv
  * @param  blind_spot             blind spot.
  * @param  cb                     callback for the command.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 livox_status SetLivoxLidarBlindSpot(uint32_t handle, uint32_t blind_spot, LivoxLidarAsyncControlCallback cb, void* client_data);
 
@@ -305,7 +305,7 @@ livox_status SetLivoxLidarBlindSpot(uint32_t handle, uint32_t blind_spot, LivoxL
  * @param  work_mode              lidar work mode.
  * @param  cb                     callback for the command.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 livox_status SetLivoxLidarWorkMode(uint32_t handle, LivoxLidarWorkMode work_mode, LivoxLidarAsyncControlCallback cb, void* client_data);
 
@@ -314,7 +314,7 @@ livox_status SetLivoxLidarWorkMode(uint32_t handle, LivoxLidarWorkMode work_mode
  * @param  handle                 device handle.
  * @param  cb                     callback for the command.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 livox_status EnableLivoxLidarGlassHeat(uint32_t handle, LivoxLidarAsyncControlCallback cb, void* client_data);
 
@@ -323,7 +323,7 @@ livox_status EnableLivoxLidarGlassHeat(uint32_t handle, LivoxLidarAsyncControlCa
  * @param  handle                 device handle.
  * @param  cb                     callback for the command.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 livox_status DisableLivoxLidarGlassHeat(uint32_t handle, LivoxLidarAsyncControlCallback cb, void* client_data);
 
@@ -333,7 +333,7 @@ livox_status DisableLivoxLidarGlassHeat(uint32_t handle, LivoxLidarAsyncControlC
  * @param  handle                 device handle.
  * @param  cb                     callback for the command.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 livox_status StartForcedHeating(uint32_t handle, LivoxLidarAsyncControlCallback cb, void* client_data);
 
@@ -343,7 +343,7 @@ livox_status StartForcedHeating(uint32_t handle, LivoxLidarAsyncControlCallback 
  * @param  handle                 device handle.
  * @param  cb                     callback for the command.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 livox_status StopForcedHeating(uint32_t handle, LivoxLidarAsyncControlCallback cb, void* client_data);
 
@@ -353,7 +353,7 @@ livox_status StopForcedHeating(uint32_t handle, LivoxLidarAsyncControlCallback c
  * @param  glass_heat             lidar glass heat.
  * @param  cb                     callback for the command.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 [[deprecated("Please USE EnableLivoxLidarGlassHeat() / StartForcedHeating() / ... instead")]]
 livox_status SetLivoxLidarGlassHeat(uint32_t handle, LivoxLidarGlassHeat glass_heat, LivoxLidarAsyncControlCallback cb, void* client_data);
@@ -363,7 +363,7 @@ livox_status SetLivoxLidarGlassHeat(uint32_t handle, LivoxLidarGlassHeat glass_h
  * @param  handle                 device handle.
  * @param  cb                     callback for the command.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 livox_status EnableLivoxLidarImuData(uint32_t handle, LivoxLidarAsyncControlCallback cb, void* client_data);
 
@@ -372,7 +372,7 @@ livox_status EnableLivoxLidarImuData(uint32_t handle, LivoxLidarAsyncControlCall
  * @param  handle                 device handle.
  * @param  cb                     callback for the command.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 livox_status DisableLivoxLidarImuData(uint32_t handle, LivoxLidarAsyncControlCallback cb, void* client_data);
 
@@ -382,7 +382,7 @@ livox_status DisableLivoxLidarImuData(uint32_t handle, LivoxLidarAsyncControlCal
  * @param  handle                 device handle.
  * @param  cb                     callback for the command.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 livox_status EnableLivoxLidarFusaFunciont(uint32_t handle, LivoxLidarAsyncControlCallback cb, void* client_data);
 
@@ -392,7 +392,7 @@ livox_status EnableLivoxLidarFusaFunciont(uint32_t handle, LivoxLidarAsyncContro
  * @param  handle                 device handle.
  * @param  cb                     callback for the command.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 livox_status DisableLivoxLidarFusaFunciont(uint32_t handle, LivoxLidarAsyncControlCallback cb, void* client_data);
 
@@ -401,7 +401,7 @@ livox_status DisableLivoxLidarFusaFunciont(uint32_t handle, LivoxLidarAsyncContr
  * @param  handle                 device handle.
  * @param  cb                     callback for the command.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 livox_status LivoxLidarRequestReset(uint32_t handle, LivoxLidarResetCallback cb, void* client_data);
 
@@ -411,7 +411,7 @@ livox_status LivoxLidarRequestReset(uint32_t handle, LivoxLidarResetCallback cb,
  * @param  log_type               The type of log file that has been configured.
  * @param  cb                     callback for the command.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 livox_status LivoxLidarStartLogger(const uint32_t handle, const LivoxLidarLogType log_type, LivoxLidarLoggerCallback cb, void* client_data);
 
@@ -421,7 +421,7 @@ livox_status LivoxLidarStartLogger(const uint32_t handle, const LivoxLidarLogTyp
  * @param  log_type               The type of log file that has been configured.
  * @param  cb                     callback for the command.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 livox_status LivoxLidarStopLogger(const uint32_t handle, const LivoxLidarLogType log_type, LivoxLidarLoggerCallback cb, void* client_data);
 
@@ -431,7 +431,7 @@ livox_status LivoxLidarStopLogger(const uint32_t handle, const LivoxLidarLogType
  * @param  enable                           true for enabling debug point cloud
  * @param  cb                               callback for the command.
  * @param  client_data                      user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error codes.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error codes.
  */
 livox_status SetLivoxLidarDebugPointCloud(uint32_t handle, bool enable, LivoxLidarLoggerCallback cb, void* client_data);
 
@@ -442,7 +442,7 @@ livox_status SetLivoxLidarDebugPointCloud(uint32_t handle, bool enable, LivoxLid
  * @param  rmc_length                       GPS "GPRMC" string length.
  * @param  cb                               callback for the command.
  * @param  client_data                      user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error codes.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error codes.
  */
 livox_status SetLivoxLidarRmcSyncTime(uint32_t handle, const char* rmc, uint16_t rmc_length, LivoxLidarRmcSyncTimeCallBack cb, void* client_data);
 
@@ -462,7 +462,7 @@ livox_status SetLivoxLidarWorkModeAfterBoot(const uint32_t handle,const LivoxLid
  * @param  handle                 device handle.
  * @param  cb                     callback for the command.
  * @param  client_data            user data associated with the command.
- * @return kStatusSuccess on successful return, see \ref LivoxStatus for other error code.
+ * @return kStatusSuccess on successful return, see \ref LivoxLidarStatus for other error code.
  */
 livox_status LivoxLidarRequestReboot(uint32_t handle, LivoxLidarRebootCallback cb, void* client_data);
 

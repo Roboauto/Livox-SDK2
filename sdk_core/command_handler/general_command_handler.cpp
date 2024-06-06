@@ -394,7 +394,7 @@ void GeneralCommandHandler::QueryFwTypeCallback(livox_status status, uint32_t ha
   static int8_t count = 0;
   if (count > 10) {
     LOG_ERROR("Query livox lidar failed, the retry time more than 10.");
-    GeneralCommandHandler* self = (GeneralCommandHandler*)(client_data);
+    auto* self = (GeneralCommandHandler*)(client_data);
     self->UpdateFwType(handle, 1);
     count = 0;
     return;
@@ -409,7 +409,7 @@ void GeneralCommandHandler::QueryFwTypeCallback(livox_status status, uint32_t ha
   if (status != kLivoxLidarStatusSuccess) {
     LOG_ERROR("Query livox lidar Fw type failed, the status:{}", status);
     count += 1;
-    GeneralCommandHandler* self = (GeneralCommandHandler*)(client_data);
+    auto* self = (GeneralCommandHandler*)(client_data);
     self->QueryFwType(handle);
     return;
   }
@@ -417,7 +417,7 @@ void GeneralCommandHandler::QueryFwTypeCallback(livox_status status, uint32_t ha
   if (response == nullptr) {
     LOG_ERROR("Query livox lidar Fw type failed, the response is nullptr.");
     count += 1;
-    GeneralCommandHandler* self = (GeneralCommandHandler*)(client_data);
+    auto* self = (GeneralCommandHandler*)(client_data);
     self->QueryFwType(handle);
     return;
   }
@@ -425,7 +425,7 @@ void GeneralCommandHandler::QueryFwTypeCallback(livox_status status, uint32_t ha
   if (response->ret_code != 0) {
     LOG_ERROR("Query livox lidar Fw type failed, the ret_code:{}", response->ret_code);
     count += 1;
-    GeneralCommandHandler* self = (GeneralCommandHandler*)(client_data);
+    auto* self = (GeneralCommandHandler*)(client_data);
     self->QueryFwType(handle);
     return;
   }
@@ -439,11 +439,11 @@ void GeneralCommandHandler::QueryFwTypeCallback(livox_status status, uint32_t ha
   // }
 
   uint16_t off = 0;  
-  LivoxLidarKeyValueParam* kv = (LivoxLidarKeyValueParam*)&response->data[off];
+  auto* kv = (LivoxLidarKeyValueParam*)&response->data[off];
   if (kv->key != kKeyFwType) {
     LOG_ERROR("Query Fw type filed, the key had fault, the key:{}", kv->key);
     count += 1;
-    GeneralCommandHandler* self = (GeneralCommandHandler*)(client_data);
+    auto* self = (GeneralCommandHandler*)(client_data);
     self->QueryFwType(handle);
     return;
   }
@@ -451,7 +451,7 @@ void GeneralCommandHandler::QueryFwTypeCallback(livox_status status, uint32_t ha
   if (kv->length != sizeof(uint8_t)) {
     LOG_ERROR("Query Fw type failed, the val lenth is error, the len:", kv->length);
     count += 1;
-    GeneralCommandHandler* self = (GeneralCommandHandler*)(client_data);
+    auto* self = (GeneralCommandHandler*)(client_data);
     self->QueryFwType(handle);
     return;
   }
@@ -462,7 +462,7 @@ void GeneralCommandHandler::QueryFwTypeCallback(livox_status status, uint32_t ha
 
   count = 0;
 
-  GeneralCommandHandler* self = (GeneralCommandHandler*)(client_data);
+  auto* self = (GeneralCommandHandler*)(client_data);
   self->UpdateFwType(handle, fw_type);
 }
 

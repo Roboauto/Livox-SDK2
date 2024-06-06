@@ -1,6 +1,6 @@
 import os
 
-from conans import ConanFile, CMake, tools
+from conans import ConanFile, tools
 # from conan.tools.cmake import CMakeToolchain, CMake
 
 from pprint import pformat
@@ -8,7 +8,7 @@ from pprint import pformat
 
 class LivoxLidarSDKConan(ConanFile):
     name = "livox_lidar_sdk"
-    version = "1.2.4.7"
+    version = "1.2.5.1"
     license = "MIT"
     url = "https://github.com/Livox-SDK/Livox-SDK2"
     description = "Drivers for receiving LiDAR data and controlling lidar, support Lidar HAP and Mid-360"
@@ -25,14 +25,6 @@ class LivoxLidarSDKConan(ConanFile):
         "CMakeLists.txt",
         "LICENSE.txt",
         "README.md"]
-
-    # def requirements(self):
-        # self.requires("fmt/10.2.1")
-        # self.requires("spdlog/1.13.0")
-        # self.requires("rapidjson/cci.20230929")
-
-    # def configure(self):
-    #     self.options["spdlog"].spdlog_fmt_external = True
 
     def configure_cmake(self):
         cmake = CMake(self)

@@ -57,7 +57,6 @@ DeviceManager::DeviceManager()
       is_stop_detection_(false),
       detection_thread_(nullptr),
       is_view_(false),
-      detection_host_ip_(""),
       enable_save_log_(false) {
 }
 
@@ -115,7 +114,7 @@ bool DeviceManager::Init(const std::string& host_ip, const LivoxLidarLoggerCfgIn
 
 bool DeviceManager::Init(std::shared_ptr<std::vector<LivoxLidarCfg>>& lidars_cfg_ptr,
                          std::shared_ptr<std::vector<LivoxLidarCfg>>& custom_lidars_cfg_ptr,
-                         std::shared_ptr<LivoxLidarLoggerCfg> lidar_logger_cfg_ptr,
+                         const std::shared_ptr<LivoxLidarLoggerCfg>& lidar_logger_cfg_ptr,
                          std::shared_ptr<LivoxLidarSdkFrameworkCfg>& sdk_framework_cfg_ptr) {
   is_view_ = false;
   lidars_cfg_ptr_ = lidars_cfg_ptr;
@@ -805,7 +804,7 @@ bool DeviceManager::GetLoggerCmdChannel(const uint8_t dev_type, const uint32_t h
   return false;
 }
 
-void DeviceManager::Destory() {
+void DeviceManager::Destroy() {
   detection_host_ip_ = "";
 
   if (detection_socket_ > 0) {
@@ -901,7 +900,7 @@ void DeviceManager::Destory() {
 }
 
 DeviceManager::~DeviceManager() {
-  Destory();
+    Destroy();
 }
 
 } // namespace lidar

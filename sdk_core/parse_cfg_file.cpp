@@ -26,6 +26,7 @@
 
 #include <map>
 #include <string>
+#include <utility>
 
 namespace livox {
 namespace lidar {
@@ -36,7 +37,7 @@ const std::map<std::string, LivoxLidarDeviceType> dev_type_map = {
 };
 
 
-ParseCfgFile::ParseCfgFile(const std::string& path) : path_(path) {}
+ParseCfgFile::ParseCfgFile(std::string path) : path_(std::move(path)) {}
 
 
 bool ParseCfgFile::Parse(std::shared_ptr<std::vector<LivoxLidarCfg>>& lidars_cfg_ptr,
@@ -169,7 +170,7 @@ bool ParseCfgFile::ParseLidarCfg(const rapidjson::Value &object, const uint8_t& 
       return false;
     }
   } else {
-    LOG_ERROR("Parse lidar net info failed, has not host_net_info member or host_net_info is not object or arry.");
+    LOG_ERROR("Parse lidar net info failed, has not host_net_info member or host_net_info is not object or array.");
     return false;
   }
   return true;
@@ -357,7 +358,7 @@ bool ParseCfgFile::ParseHostNetInfo(const rapidjson::Value &host_net_info_object
 }
 
 
-bool ParseCfgFile::ParseGeneralCfgInfo(const rapidjson::Value &object, GeneralCfgInfo& general_cfg_info) {
+bool ParseCfgFile::ParseGeneralCfgInfo(const rapidjson::Value &/*object*/, GeneralCfgInfo& /*general_cfg_info*/) {
   return true;
 }
 

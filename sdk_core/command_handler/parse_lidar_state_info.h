@@ -47,6 +47,7 @@ namespace lidar {
 class ParseLidarStateInfo {
  public:
   static bool Parse(const CommPacket& packet, std::string& info);
+  static bool Parse(const CommPacket& packet, DirectLidarStateInfo& info);
  private:
   static bool ParseStateInfo(const CommPacket& packet, DirectLidarStateInfo& info, std::set<ParamKeyName>& key_mask);
   static void ParseLidarIpAddr(const CommPacket& packet, uint16_t off, DirectLidarStateInfo& info);

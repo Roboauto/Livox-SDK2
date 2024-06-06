@@ -122,9 +122,9 @@ class Firmware {
   const uint32_t FirmwarePackageVersion() const { return header_.file_version; }
 
 
-  LivoxEncryptFirmwareHeader header_;
+  LivoxEncryptFirmwareHeader header_{};
   uint8_t *data_;
-  LivoxEncryptFirmwareTail tail_;
+  LivoxEncryptFirmwareTail tail_{};
   uint64_t file_size_;
 
  private:

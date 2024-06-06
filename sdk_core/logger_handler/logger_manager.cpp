@@ -116,7 +116,7 @@ bool LoggerManager::GetLogEnable() {
 bool LoggerManager::InitLoggerSavePath(std::string log_root_path) {
   std::string log_root_dir = log_root_path + (log_root_path.back() == '/' ? "" : "/") + "lidar_log/";
   if (access(log_root_dir.c_str(), 0) != EXIT_SUCCESS) {
-    if (!MakeDirecotory(log_root_dir)) {
+    if (!MakeDirectory(log_root_dir)) {
       LOG_ERROR("Can't Create Dir {}", log_root_dir);
       return false;
     }
