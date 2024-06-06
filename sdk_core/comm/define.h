@@ -82,7 +82,7 @@ typedef struct livoxLidarLoggerCfg {
 } LivoxLidarLoggerCfg;
 
 typedef struct livoxLidarSdkFrameworkCfg {
-  bool master_sdk;
+  bool master_sdk = true;
 } LivoxLidarSdkFrameworkCfg;
 
 typedef enum {
